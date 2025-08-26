@@ -1,0 +1,63 @@
+# -----------------------
+# Python
+# -----------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+*.sqlite3
+.env
+.venv/
+venv/
+env/
+*.pyc
+
+# -----------------------
+# Jupyter
+# -----------------------
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# -----------------------
+# Spark
+# -----------------------
+*.parquet
+*.orc
+*.csv
+*.json
+/in
+metastore_db/
+spark-warehouse/
+
+# -----------------------
+# Docker
+# -----------------------
+# Imagens, containers, volumes
+docker-compose.override.yml
+*.dockerignore
+*.log
+*.pid
+*.sock
+/tmp/*
+**/__pycache__/
+
+# -----------------------
+# OS / IDE
+# -----------------------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# -----------------------
+# Data
+# -----------------------
+data/
+output/

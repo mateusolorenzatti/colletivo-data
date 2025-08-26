@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  notebook:
+    build:
+      context: ./docker/notebook
+    container_name: spark_notebook
+    env_file: .env
+    user: "${NB_UID}:${NB_GID}"
+    ports:
+      - "8888:8888"   # Jupyter
+    environment:
+      JUPYTER_TOKEN: ${JUPYTER_TOKEN}
+      # Configura Spark local; você pode ajustar memória/cores
+      SPARK_OPTS: "--driver-memory 4g --executor-memory 4g"
+    volumes:
+      - ./notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/work/data
+      - ./src:/home/jovyan/work/src
+    command: start-notebook.sh --NotebookApp.token=${JUPYTER_TOKEN} --NotebookApp.allow_origin='*'
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16
+    container_name: spark_postgres
+    env_file: .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:
