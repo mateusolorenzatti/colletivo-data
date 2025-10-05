@@ -5,3 +5,9 @@ pyarrow
 python-dotenv
 sqlalchemy
 psycopg2-binary
+geopandas
+matplotlib
+shapely
+geodatasets
+great_expectations
+protobuf

@@ -1,5 +1,5 @@
 # Base oficial dos Jupyter Docker Stacks com PySpark (Spark + Hadoop + Jupyter)
-FROM quay.io/jupyter/pyspark-notebook:latest
+FROM quay.io/jupyter/pyspark-notebook:python-3.11.8
 
 # Evita prompts interativos
 ENV DEBIAN_FRONTEND=noninteractive

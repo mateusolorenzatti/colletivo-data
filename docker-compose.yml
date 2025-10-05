@@ -4,11 +4,11 @@ services:
   notebook:
     build:
       context: ./docker/notebook
-    container_name: spark_notebook
+    container_name: jupyter_spark
     env_file: .env
     user: "${NB_UID}:${NB_GID}"
     ports:
-      - "8888:8888"   # Jupyter
+      - "8888:8888"
     environment:
       JUPYTER_TOKEN: ${JUPYTER_TOKEN}
       # Configura Spark local; você pode ajustar memória/cores
@@ -17,13 +17,13 @@ services:
       - ./notebooks:/home/jovyan/work
       - ./data:/home/jovyan/work/data
       - ./src:/home/jovyan/work/src
+      - ./gx:/workspace/gx
     command: start-notebook.sh --NotebookApp.token=${JUPYTER_TOKEN} --NotebookApp.allow_origin='*'
     depends_on:
       - postgres
-
   postgres:
     image: postgres:16
-    container_name: spark_postgres
+    container_name: db_postgres
     env_file: .env
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
