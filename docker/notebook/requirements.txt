@@ -11,4 +11,5 @@ shapely
 geodatasets
 great_expectations
 protobuf
-papermill
+contextily
+folium
